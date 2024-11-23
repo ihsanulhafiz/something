@@ -1,0 +1,18 @@
+document.getElementById('sapaForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const nama = document.getElementById('nama').value;
+    
+    fetch('process.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'nama=' + encodeURIComponent(nama)
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('result').innerHTML = data.message;
+    })
+    .catch(error => console.error('Error:', error));
+});
